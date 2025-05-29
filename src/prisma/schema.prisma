@@ -1,0 +1,20 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db" // データベースファイルのパスを指定
+}
+
+generator client {
+  // Prisma Clientの生成設定
+  provider = "prisma-client-js"
+}
+
+model Station {
+  id            Int     @id @default(autoincrement()) // 駅のID
+  name          String // 駅名
+  kana          String // 駅名のふりがな
+  line          String // 路線名
+  stationNumber String? // 駅番号
+  isTransfer    Boolean @default(false) // 乗り換え可能な駅かどうか
+  transferLines String? //  乗り換え可能な路線のリスト
+  nextStationId Int? // 次駅のID
+}
